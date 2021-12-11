@@ -1,23 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { categories } from '../data'
-import CategoryItem from './CategoryItem'
+import {popularProducts} from "../data"
+import Product from './Product'
 
 const Container = styled.div`
     display:flex;
     padding:20px;
+    flex-wrap:wrap; 
     justify-content:space-between;
 `
 
-function Categories() {
+function Products() {
     return (
         <Container>
-            {categories.map(item => {
-                return <CategoryItem item={item} key={item.id} />
+            {popularProducts.map(item=>{
+                return <Product item={item} key={item.id}></Product>
             })}
         </Container>
     )
 }
 
-export default Categories
+export default Products

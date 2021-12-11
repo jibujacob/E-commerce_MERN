@@ -93,7 +93,7 @@ function Slider() {
             <Wrapper sliderIndex={sliderIndex}>
                 {sliderItems.map((items)=> {
                     return (
-                        <Slide bg={items.bg}>
+                        <Slide bg={items.bg} key={items.id}>
                             <ImgContainer>
                                 <Image src={items.img}/>
                             </ImgContainer>
