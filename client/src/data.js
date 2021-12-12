@@ -15,7 +15,7 @@ export const sliderItems = [
     },
     {
       id: 3,
-      img: "https://lh3.googleusercontent.com/proxy/6xNkDFjwRvuWco8S2rFHmKOqvIpHVAlVqGBTIBlkCX6BlBDWXY7BltiYwHulmzRXhu-LEPwRPvjXkfX9gKg7CmIpkbYriIogH50",
+      img: "https://lh3.googleusercontent.com/proxy/sdc4CBYb4n14yInHzJsbTplCszbbgmiQxylzEAqaHIC7XG8krcjulGS87veXRkchUWQpEhpi89Ekm0858zdZ0pLQLDXHffXufCc",
       title: "SUMMER SALE",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "f5fafd",
