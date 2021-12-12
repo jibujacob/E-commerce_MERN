@@ -53,8 +53,6 @@ const Button = styled.button`
     cursor:pointer;
 `
 
-
-
 function Newsletter() {
     return (
         <Container>
