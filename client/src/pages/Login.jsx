@@ -68,7 +68,7 @@ function Login() {
                     <Input placeholder="Username" />
                     <Input type="password" placeholder="Password" />
                     <Button>Login</Button>
-                    <Link>DO NOT REMEMBER YOUR PASSWORD?</Link>
+                    <Link>FORGOT PASSWORD?</Link>
                     <Link>CREATE A NEW ACCOUNT</Link>
                 </Form>
             </Wrapper>
