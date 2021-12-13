@@ -9,7 +9,7 @@ import Footer from '../components/Footer'
 
 function Home() {
     return (
-        <div className="home">
+        <div>
             <Announcement/>
             <Navbar/>
             <Slider/>
