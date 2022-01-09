@@ -1,0 +1,32 @@
+#Deployment Setup for Client service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerceclient-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerceclient
+  template:
+    metadata:
+      labels:
+        app: ecommerceclient
+    spec:
+      containers:
+        - name: ecommerceclient
+          image: jibujacob/ecommerceclient
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerceclient-srv
+spec:
+  selector:
+    app: ecommerceclient
+  type: ClusterIP
+  ports:
+    - name: ecommerceclient
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
