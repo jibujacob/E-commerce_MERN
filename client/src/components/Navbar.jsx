@@ -42,6 +42,10 @@ const SearchContainer = styled.div`
 const Input = styled.input`
     border: none;
     ${mobile({width:"50px"})};
+
+    :focus{
+        outline:none;
+    }
 `
 
 const Center = styled.div`
@@ -87,9 +91,9 @@ function Navbar() {
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
                     <MenuItem>
-                    <Badge badgeContent={4} color="primary">
-                        <ShoppingCartOutlinedIcon color="action" />
-                    </Badge>
+                        <Badge badgeContent={4} color="primary">
+                            <ShoppingCartOutlinedIcon color="action" />
+                        </Badge>
                     </MenuItem>
                 </Right>
             </Wrapper>
