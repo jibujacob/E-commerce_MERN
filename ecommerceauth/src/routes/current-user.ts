@@ -4,7 +4,7 @@ import { User } from "../models/user";
 
 const router = express.Router();
 
-router.get("/api/users/currentUser", currentUser ,async (req,res) => {
+router.get("/api/auth/currentUser", currentUser ,async (req,res) => {
 
     if(req.currentUser){
         const user = await User.findById(req.currentUser.id)

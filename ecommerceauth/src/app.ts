@@ -1,4 +1,4 @@
-import { errorHandler, NotFoundError } from "@jjecommerce2022/common";
+import { currentUser, errorHandler, NotFoundError } from "@jjecommerce2022/common";
 import express from "express";
 import "express-async-errors";
 import helmet from "helmet";
@@ -9,6 +9,11 @@ import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
 import { currentUserRouter } from "./routes/current-user";
+import { updateUserRouter } from "./routes/update";
+import { deleteUserRouter } from "./routes/delete";
+import { getUserRouter } from "./routes/getUser";
+import { getAllUserRouter } from "./routes/getAllUsers";
+import { userStatsRouter } from "./routes/userStats";
 
 
 const app = express();
@@ -24,11 +29,18 @@ app.use(
     })
   );
 
+  app.use(currentUser);
 
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter);
 app.use(currentUserRouter);
+
+app.use(updateUserRouter);
+app.use(deleteUserRouter);
+app.use(getUserRouter);
+app.use(getAllUserRouter);
+app.use(userStatsRouter);
 
 
 app.all("*",async()=>{

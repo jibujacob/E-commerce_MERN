@@ -11,7 +11,21 @@ spec:
     - host: ecommercejj.dev
       http:
         paths:
+          - path: /api/auth/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: ecommerceauth-srv
+                port:
+                  number: 5001
           - path: /api/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: ecommerceauth-srv
+                port:
+                  number: 5001
+          - path: /api/analytics/?(.*)
             pathType: Prefix
             backend:
               service:

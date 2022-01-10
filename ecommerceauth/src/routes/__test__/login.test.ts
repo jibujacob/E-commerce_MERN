@@ -4,7 +4,7 @@ import { User } from "../../models/user";
 
 const setup = async() => {
     await request(app)
-    .post("/api/users/register")
+    .post("/api/auth/register")
     .send({
         username:"jibu",
         email:"jibu@abc.com",
@@ -16,7 +16,7 @@ const setup = async() => {
 it("return 400 if madatory inputs are not provided",async()=>{
     await setup();
     await request(app)
-        .post("/api/users/login")
+        .post("/api/auth/login")
         .send({})
         .expect(400);
 });
@@ -24,13 +24,13 @@ it("return 400 if madatory inputs are not provided",async()=>{
 it("returns a 400 code if password lenght is less than 6 or more than 20", async () =>{
     await setup();
     await request(app)
-            .post("/api/users/login")
+            .post("/api/auth/login")
             .send({
                 username:"jibu",
                 password: "pera"
             }).expect(400);
     await request(app)
-            .post("/api/users/login")
+            .post("/api/auth/login")
             .send({
                 username:"jibu",
                 password: "pefsfsegsegsgfsrsgrsgsrfsrgrsgsgra"
@@ -39,7 +39,7 @@ it("returns a 400 code if password lenght is less than 6 or more than 20", async
 
 it("returns 400 if the user does not exists", async () => {
     await request(app)
-            .post("/api/users/login")
+            .post("/api/auth/login")
             .send({
                 username:"jibu",
                 password: "pefsfsegsegsgfsrsgrsgsrfsrgrsgsgra"
@@ -49,7 +49,7 @@ it("returns 400 if the user does not exists", async () => {
 it("returns 400 if the paswords does not match", async () => {
     await setup();
     await request(app)
-            .post("/api/users/login")
+            .post("/api/auth/login")
             .send({
                 username:"jibu",
                 password: "pefsfsegsegsgfsrsgrsgsrfsrgrsgsgra"
@@ -59,7 +59,7 @@ it("returns 400 if the paswords does not match", async () => {
 it("returns 200 if login successfull", async () => {
     await setup();
     await request(app)
-            .post("/api/users/login")
+            .post("/api/auth/login")
             .send({
                 username:"jibu",
                 password: "password"
@@ -69,7 +69,7 @@ it("returns 200 if login successfull", async () => {
 it('sets a cookie after successful signup', async () => {
     await setup();
     const response = await request(app)
-      .post('/api/users/login')
+      .post('/api/auth/login')
       .send({
         username:"jibu",
         password: 'password'

@@ -10,7 +10,7 @@ import { Password } from "../services/password";
 
 const router = express.Router();
 
-router.post("/api/users/login", 
+router.post("/api/auth/login", 
     [
         body("username")
             .trim()
@@ -45,7 +45,8 @@ router.post("/api/users/login",
         {
           id: existingUser.id,
           email: existingUser.email,
-          isAdmin : existingUser.isAdmin
+          isAdmin : existingUser.isAdmin,
+          username:existingUser.username,
         },
         process.env.JWT_KEY!,
         {expiresIn:"1d"}

@@ -8,7 +8,7 @@ import { User } from "../models/user";
 
 const router = express.Router();
 
-router.post("/api/users/register",
+router.post("/api/auth/register",
     [
         body("username")
             .trim()
@@ -49,6 +49,7 @@ router.post("/api/users/register",
     const userJwt = jwt.sign(
         {
           id: user.id,
+          username:user.username,
           email: user.email,
           isAdmin : user.isAdmin
         },

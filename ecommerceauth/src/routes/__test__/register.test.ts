@@ -4,14 +4,14 @@ import { User } from "../../models/user";
 
 it("return 400 if madatory inputs are not provided",async()=>{
     await request(app)
-        .post("/api/users/register")
+        .post("/api/auth/register")
         .send({})
         .expect(400);
 });
 
 it("returns a 400 code with an invalid email", async () => {
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"abc",
@@ -21,19 +21,19 @@ it("returns a 400 code with an invalid email", async () => {
 
 it("returns a 400 code if mandatory attributes are not provided", async () => {
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 email:"jibu@abc.com",
                 password: "perarefef"
             }).expect(400);
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 password: "perarefef"
             }).expect(400);
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"jibu@abc.com",
@@ -42,14 +42,14 @@ it("returns a 400 code if mandatory attributes are not provided", async () => {
 
 it("returns a 400 code if password lenght is less than 6 or more than 20", async () =>{
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"jibu@abc.com",
                 password: "pera"
             }).expect(400);
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"jibu@abc.com",
@@ -59,14 +59,14 @@ it("returns a 400 code if password lenght is less than 6 or more than 20", async
 
 it("returns a 400 if user already exists", async () =>{
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"jibu@abc.com",
                 password: "perefsefa"
             }).expect(201);
     await request(app)
-            .post("/api/users/register")
+            .post("/api/auth/register")
             .send({
                 username:"jibu",
                 email:"jibu@abc.com",
@@ -80,7 +80,7 @@ it("returns 201 if user is successfully registered",async()=>{
     expect(users.length).toEqual(0);
     
     await request(app)
-        .post("/api/users/register")
+        .post("/api/auth/register")
         .send({
             username:"jibujacob",
             password:"fefefeffae",
@@ -94,7 +94,7 @@ it("returns 201 if user is successfully registered",async()=>{
 
 it('sets a cookie after successful signup', async () => {
     const response = await request(app)
-      .post('/api/users/register')
+      .post('/api/auth/register')
       .send({
         username:"test",
         email: 'test@test.com',
