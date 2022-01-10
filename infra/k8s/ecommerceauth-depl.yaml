@@ -1,0 +1,38 @@
+#Deployment Setup for Client service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerceauth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerceauth
+  template:
+    metadata:
+      labels:
+        app: ecommerceauth
+    spec:
+      containers:
+        - name: ecommerceauth
+          image: jibujacob/ecommerceauth
+          env:
+            - name: MONGO_AUTH_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-authdb
+                  key: MONGO_AUTH_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerceauth-srv
+spec:
+  selector:
+    app: ecommerceauth
+  type: ClusterIP
+  ports:
+    - name: ecommerceauth
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

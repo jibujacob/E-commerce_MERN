@@ -1,0 +1,38 @@
+#Deployment Setup for Client service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerceproduct-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerceproduct
+  template:
+    metadata:
+      labels:
+        app: ecommerceproduct
+    spec:
+      containers:
+        - name: ecommerceproduct
+          image: jibujacob/ecommerceproduct
+          env:
+            - name: MONGO_PRODUCT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-productdb
+                  key: MONGO_PRODUCT_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerceproduct-srv
+spec:
+  selector:
+    app: ecommerceproduct
+  type: ClusterIP
+  ports:
+    - name: ecommerceproduct
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

@@ -1,0 +1,38 @@
+#Deployment Setup for Client service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerceorder-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerceorder
+  template:
+    metadata:
+      labels:
+        app: ecommerceorder
+    spec:
+      containers:
+        - name: ecommerceorder
+          image: jibujacob/ecommerceorder
+          env:
+            - name: MONGO_ORDER_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-orderdb
+                  key: MONGO_ORDER_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerceorder-srv
+spec:
+  selector:
+    app: ecommerceorder
+  type: ClusterIP
+  ports:
+    - name: ecommerceorder
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

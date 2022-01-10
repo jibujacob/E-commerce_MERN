@@ -22,3 +22,43 @@ build:
         manual:
           - src: "**/*.*"
             dest: .
+    - image: jibujacob/ecommerceauth
+      context: ecommerceauth
+      docker:
+        dockerfile: Dockerfile
+        # cliFlags:
+        #   - --platform=linux/amd64
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: jibujacob/ecommerceproduct
+      context: ecommerceproduct
+      docker:
+        dockerfile: Dockerfile
+        # cliFlags:
+        #   - --platform=linux/amd64
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: jibujacob/ecommercecart
+      context: ecommercecart
+      docker:
+        dockerfile: Dockerfile
+        # cliFlags:
+        #   - --platform=linux/amd64
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: jibujacob/ecommerceorder
+      context: ecommerceorder
+      docker:
+        dockerfile: Dockerfile
+        # cliFlags:
+        #   - --platform=linux/amd64
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .

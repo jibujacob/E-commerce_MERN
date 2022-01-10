@@ -6,7 +6,6 @@ import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 
 import { mobile,tablet } from '../Responsive';
-import { flexbox } from '@mui/system';
  
 const Container = styled.div`
     width:100%;

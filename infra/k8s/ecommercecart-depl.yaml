@@ -1,0 +1,38 @@
+#Deployment Setup for Client service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommercecart-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommercecart
+  template:
+    metadata:
+      labels:
+        app: ecommercecart
+    spec:
+      containers:
+        - name: ecommercecart
+          image: jibujacob/ecommercecart
+          env:
+            - name: MONGO_CART_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-cartdb
+                  key: MONGO_CART_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommercecart-srv
+spec:
+  selector:
+    app: ecommercecart
+  type: ClusterIP
+  ports:
+    - name: ecommercecart
+      protocol: TCP
+      port: 5001
+      targetPort: 5001
