@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Password } from "../services/password";
 
 interface UserAttrs{
     username : string;
@@ -40,7 +41,7 @@ const userSchema = new mongoose.Schema({
     toJSON:{
         transform(doc,ret){
             ret.id = ret._id;
-            delete ret.id;
+            delete ret._id;
             delete ret.password;
             delete ret.__v;
         }
@@ -48,7 +49,19 @@ const userSchema = new mongoose.Schema({
     timestamps:true
 });
 
+userSchema.pre("save", async function(next){
+    if(this.isModified("password")){
+        const hashed = await Password.toHash(this.get("password"));
+        this.set("password",hashed);
+        next();
+    }
+});
 
-const User = mongoose.model("User",userSchema);
+userSchema.statics.build = (attrs:UserAttrs)=>{
+    return new User(attrs);
+};
+
+
+const User = mongoose.model<UserDoc,UserModel>("User",userSchema);
 
 export {User}
