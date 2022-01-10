@@ -12,7 +12,8 @@
 
   Features Implemented:
     
-  Kubernetes Environment Secrets to be setup before deployment
+  Kubernetes Environment Secrets to be setup before deployment:
+    MONGO_AUTH_URI
   
   
   CI/CD:
