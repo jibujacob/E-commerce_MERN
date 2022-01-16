@@ -7,7 +7,7 @@ interface CartItems{
 
 interface CartAttrs{
     userId: string;
-    product : Array<CartItems>
+    products : Array<CartItems>
 }
 
 interface CartModel extends mongoose.Model<CartDoc>{
@@ -16,7 +16,7 @@ interface CartModel extends mongoose.Model<CartDoc>{
 
 interface CartDoc extends mongoose.Document{
     userId: string;
-    product : Array<CartItems>
+    products : Array<CartItems>
 }
 
 const cartSchema = new mongoose.Schema({
@@ -39,14 +39,16 @@ const cartSchema = new mongoose.Schema({
     toJSON:{
         transform(doc,ret){
             ret.id = ret._id;
-            delete ret.id;
+            delete ret._id;
             delete ret.__v;
         }
     },
     timestamps:true
 });
 
-
-const Cart = mongoose.model("Cart",cartSchema);
+cartSchema.statics.build = (attrs:CartAttrs) => {
+    return new Cart(attrs)
+}
+const Cart = mongoose.model<CartDoc,CartModel>("Cart",cartSchema);
 
 export {Cart}
