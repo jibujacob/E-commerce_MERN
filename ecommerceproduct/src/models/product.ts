@@ -4,7 +4,7 @@ interface ProductAttrs{
     title : string;
     desc : string;
     img : string;
-    categories : string;
+    categories : Array<string>;
     size?: string;
     color?: string;
     price : number;
@@ -18,7 +18,7 @@ interface ProductDoc extends mongoose.Document{
     title : string;
     desc : string;
     img : string;
-    categories : string;
+    categories : Array<string>;
     size?: string;
     color?: string;
     price : number;
@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema({
         required : true
     },
     categories:{
-        type : String,
+        type : Array,
         required : true
     },
     size:{
@@ -56,13 +56,17 @@ const productSchema = new mongoose.Schema({
     toJSON:{
         transform(doc,ret){
             ret.id = ret._id;
-            delete ret.id;
+            delete ret._id;
             delete ret.__v;
         }
     },
     timestamps:true
 });
 
-const Product = mongoose.model("Product",productSchema);
+productSchema.statics.build = (attrs:ProductAttrs) => {
+    return new Product(attrs);
+}
+
+const Product = mongoose.model<ProductDoc,ProductModel>("Product",productSchema);
 
 export {Product}

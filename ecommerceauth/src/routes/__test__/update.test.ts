@@ -30,7 +30,7 @@ it("same user or admin user only can delete their details",async () => {
     const response = await setup();
     await request(app)
     .put(`/api/users/${response.body.id}`)
-    .set("Cookie",global.signinuser())
+    .set("Cookie",global.signinuser()[0])
     .send({
         username:"jibu",
         email:"jibu@abc.com",

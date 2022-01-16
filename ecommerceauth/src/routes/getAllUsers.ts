@@ -1,4 +1,4 @@
-import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth } from "@jjecommerce2022/common";
+import { BadRequestError, NotAuthorizedError, requireAuth } from "@jjecommerce2022/common";
 import express, {Request,Response} from "express"
 import { StatusCodes } from "http-status-codes";
 import { User } from "../models/user";
@@ -15,7 +15,7 @@ router.get("/api/users" ,
         throw new NotAuthorizedError();
     }
 
-    const user = query ? await User.find({}).sort({_id:-1}).limit(5) : await User.find({});
+    const user = query ? await User.find({}).sort({createdAt:-1}).limit(5) : await User.find({});
 
     res.status(StatusCodes.OK).send(user)
 })
