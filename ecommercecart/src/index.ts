@@ -8,6 +8,9 @@ const start = async () =>{
     if(!process.env.MONGO_CART_URI){
         throw new Error("MONGO_CART_URI not defined for Cart Services")
     }
+    if(!process.env.JWT_KEY){
+        throw new Error("JWT_KEY not defined for Auth Services")
+    }
     try {
         await mongoose.connect(process.env.MONGO_CART_URI);
         console.log("Connected to the Cart Services DB");

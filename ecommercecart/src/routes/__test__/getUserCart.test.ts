@@ -25,7 +25,7 @@ it("returns 401 if not owner user tries to access this api",async () => {
 
     await request(app)
         .get(`/api/carts/${userId}`)
-        .set("Cookie",global.signinuser())
+        .set("Cookie",global.signinuser()[0])
         .send({})
         .expect(401)
 });

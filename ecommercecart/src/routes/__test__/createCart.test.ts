@@ -11,7 +11,7 @@ it("returns 401 if unauthorized user tries to create cart",async()=>{
 it("returns 201 if authorized user tries to create cart",async()=>{
     await request(app)
         .post("/api/carts")
-        .set("Cookie",global.signinuser())
+        .set("Cookie",global.signinuser()[0])
         .send({products:[
                 {productId:"124123124",
                 quantity:1

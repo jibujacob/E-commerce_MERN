@@ -14,7 +14,7 @@ it("returns 400 if cart does not exists",async()=>{
     const id = new mongoose.Types.ObjectId().toHexString();
     await request(app)
         .put(`/api/carts/${id}`)
-        .set("Cookie",global.signinuser())
+        .set("Cookie",global.signinuser()[0])
         .send({})
         .expect(400)
 });
@@ -22,7 +22,7 @@ it("returns 400 if cart does not exists",async()=>{
 it("returns 401 if cart does not belog to the logged in user",async()=>{
     const response = await request(app)
         .post("/api/carts")
-        .set("Cookie",global.signinuser())
+        .set("Cookie",global.signinuser()[0])
         .send({products:[
                 {productId:"124123124",
                 quantity:1
@@ -34,7 +34,7 @@ it("returns 401 if cart does not belog to the logged in user",async()=>{
     const id = new mongoose.Types.ObjectId().toHexString();
     await request(app)
         .put(`/api/carts/${response.body.id}`)
-        .set("Cookie",global.signinuser())
+        .set("Cookie",global.signinuser()[0])
         .send({})
         .expect(401)
 });

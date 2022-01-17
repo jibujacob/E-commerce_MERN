@@ -9,7 +9,6 @@ const router = express.Router();
 router.get("/api/carts",
     requireAuth,
     async(req:Request,res:Response)=> {
-        console.log(req.currentUser);
         
         if(!req.currentUser!.isAdmin){
             throw new NotAuthorizedError()

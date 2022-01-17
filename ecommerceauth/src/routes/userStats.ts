@@ -6,7 +6,7 @@ import { User } from "../models/user";
 const router = express.Router();
 
 
-router.get("/api/analytics/stats", requireAuth , async (req:Request,res:Response) => {
+router.get("/api/users/analytics/stats", requireAuth , async (req:Request,res:Response) => {
     //@ts-ignore
     if(!req.currentUser?.isAdmin){
         throw new NotAuthorizedError();
