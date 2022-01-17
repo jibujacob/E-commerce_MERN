@@ -19,6 +19,7 @@
     MONGO_ORDER_URI, 
     JWT_KEY, 
     STRIPE_KEY, 
+    STRIPE_REACT_KEY
   
   
   CI/CD:
