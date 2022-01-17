@@ -1,7 +1,8 @@
 import React ,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
-
+import axios from 'axios';
+import {useDispatch} from "react-redux";
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -11,7 +12,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 import { mobile } from '../Responsive'
-import axios from 'axios'
+
+import { addProduct } from '../redux/cartRedux'
 
 
 const Container = styled.div`
@@ -79,6 +81,7 @@ const FilterColor = styled.div`
     margin:0 5px;
     cursor:pointer;
     border:1px solid black;
+
 `
 
 const FilterSize = styled.select`
@@ -141,6 +144,7 @@ function Product() {
     const [quantity,setQuantity] = useState(1);
     const [color,setColor] = useState("");
     const [size,setSize] = useState("");
+    const dispatch = useDispatch();
 
     const handleQuantity = (type) => {
         if(type==="inc"){
@@ -151,7 +155,15 @@ function Product() {
     }
 
     const handleClick = ()=>{
-        
+        if(color && size ){
+            dispatch(
+                addProduct({
+                    ...product,quantity,color,size
+                })
+            )
+        }else{
+            alert("Please select size and color")
+        }
     }
 
     useEffect(()=>{
@@ -162,7 +174,6 @@ function Product() {
         
         fetchproduct();
     },[productId])
-
     return (
         <Container>
             <Announcement/>
@@ -186,8 +197,8 @@ function Product() {
                         </Filter> 
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize onChange ={(e)=>setSize(e.target.value)} defaultValue={"Size"}>
-                                <FilterSizeOption disabled>Size</FilterSizeOption>
+                            <FilterSize defaultValue={"Size"} onChange ={(e)=>setSize(e.target.value)}>
+                                <FilterSizeOption>Size</FilterSizeOption>
                                 {product.size?.map((item) => {
                                     return <FilterSizeOption key={item}>{item}</FilterSizeOption>
                                 })}
