@@ -164,6 +164,7 @@ const Button = styled.button`
     color:white;
     cursor:pointer;
     font-weight:600;
+    margin-top:20px;
 `
 
 function Cart() {

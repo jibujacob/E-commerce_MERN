@@ -24,11 +24,6 @@ router.post("/api/products",
             .not()
             .isEmpty()
             .withMessage("Please provide product image"),
-        body("categories")
-            .trim()
-            .not()
-            .isEmpty()
-            .withMessage("Please provide product categories"),
         body("price")
             .trim()
             .not()

@@ -15,7 +15,7 @@ router.get("/api/products",
     let queryObject:PostQuery={};
 
     const queryNew = req.query.new==="true"? true : false;
-    const queryCategory = req.query.category?.toString();
+    const queryCategory = req.query.category?.toString().toLowerCase();
 
     if(queryCategory){
         queryObject.categories = {$in:[queryCategory]};

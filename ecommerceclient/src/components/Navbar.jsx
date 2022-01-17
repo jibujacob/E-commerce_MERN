@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from "styled-components"
+import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -56,6 +57,7 @@ const Center = styled.div`
 const Logo = styled.h1`
     font-weight:bold;
     ${mobile({ fontSize: "24px" })};
+    cursor: pointer;
 `
 
 const Right = styled.div`
@@ -85,7 +87,9 @@ function Navbar() {
                     </SearchContainer>     
                 </Left>
                 <Center>
-                    <Logo>JJ.</Logo>
+                    <Link to="/" style={{textDecoration:"none",color:"inherit"}}>
+                        <Logo>JJ.</Logo>
+                    </Link>
                 </Center>
                 <Right>
                     <MenuItem>REGISTER</MenuItem>

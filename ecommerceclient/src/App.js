@@ -6,12 +6,14 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 
 import {
-  BrowserRouter,
-  Routes,
-  Route
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
 } from "react-router-dom";
 
 function App() {
+  const user = true;
   return (
     <div className="app">
       {/* <Home/> */}
@@ -21,15 +23,28 @@ function App() {
       {/* <Login/> */}
       {/* <Cart/>  */}
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          {/* <Route path="/pay" element={<Pay/>} />
-          <Route path="/success" element={<Success/>} /> */}
-        </Routes>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route exact path="/" >
+            <Home/>
+          </Route>
+          <Route path="/login" >
+            {user ? <Redirect to="/"/>:<Login/>}
+          </Route>
+          <Route path="/register" >
+            {user ? <Redirect to="/"/>:<Register/>}
+          </Route>
+          <Route path="/cart" >
+            <Cart/>
+          </Route>
+          <Route path="/products/:category" >
+            <ProductList/>
+          </Route>
+          <Route path="/product/:id" >
+            <Product/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
