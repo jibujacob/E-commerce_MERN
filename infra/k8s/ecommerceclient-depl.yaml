@@ -16,6 +16,12 @@ spec:
       containers:
         - name: ecommerceclient
           image: jibujacob/ecommerceclient
+          env:
+            - name: REACT_APP_STRIPE
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-react-secret
+                  key: REACT_APP_STRIPE
 ---
 apiVersion: v1
 kind: Service

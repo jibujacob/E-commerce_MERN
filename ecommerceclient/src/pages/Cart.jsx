@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {useSelector} from "react-redux";
-
+import StripeCheckout from "react-stripe-checkout";
+import axios from 'axios';
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import {loadStripe} from '@stripe/stripe-js';
 
 import { mobile } from '../Responsive'
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+
+const KEY = process.env.REACT_APP_STRIPE;
+
 
 const Container = styled.div`
 
@@ -169,8 +176,52 @@ const Button = styled.button`
 `
 
 function Cart() {
-
+    const history = useHistory();
     const cart = useSelector(state => state.cart);
+    const [stripeToken,setStripeToken] = useState("")
+    const onToken = (token) =>{
+        setStripeToken(token);
+    }
+
+    // useEffect(()=>{
+    //     const checkoutpayment = async ()=>{
+    //         try {
+    //             const res = await axios.post("/api/payments",{
+    //                 amount:cart.total * 100,
+    //                 tokenId:stripeToken.id
+    //             });
+    //             history.push("/success",{data:res.data});
+    //             console.log(res.data);
+    //         } catch (error) {
+    //             console.log("checkoutpayment:",error);
+    //         }
+    //     }
+    //     stripeToken && checkoutpayment();
+        
+    // },[stripeToken])
+ 
+    const handlePayment = async()=>{
+        const stripe = await loadStripe(KEY);
+        
+        const res = await axios.post("/api/payments",{
+            amount:cart.total * 100,
+            quantity:cart.quantity
+        })
+        window.location = res.data.session.url;
+        
+        // stripe.redirectToCheckout({
+        //     lineItems: [{
+        //       // Define the product and price in the Dashboard first, and use the price
+        //       // ID in your client-side code.
+        //       price: '{PRICE_ID}',
+        //       quantity: 1
+        //     }],
+        //     mode: 'payment',
+        //     successUrl: "http://ecommercejj.dev/success",
+        //     cancelUrl: 'http://ecommercejj.dev/cancel'
+        //   });
+    }
+
     return (
         <Container>
             <Announcement/>
@@ -183,7 +234,7 @@ function Cart() {
                             <TopText>Shopping Bag ({cart.quantity})</TopText>
                             <TopText>Your Wishlist (0)</TopText>
                         </TopTexts>
-                        <TopButton type="filled">CHECKOUT NOW</TopButton>
+                        <TopButton onClick={handlePayment} type="filled">CHECKOUT NOW</TopButton>
                     </Top>
                     <Bottom>
                         <Info>
@@ -235,7 +286,21 @@ function Cart() {
                                 <SummaryItemText >Total</SummaryItemText>
                                 <SummaryItemPrice>&#8377; {cart.total}</SummaryItemPrice>
                             </SummaryItem>
-                            <Button>CHECKOUT NOW</Button>
+                            <Button onClick={handlePayment}>CHECKOUT NOW</Button>   
+                            {/* Older version of stripe usage */}
+                            {/* <StripeCheckout
+                                // name="JJ Shop"
+                                // billingAddress
+                                // shippingAddress
+                                // description={`Your total is Rs.${cart.total}`}
+                                amount={cart.total*100}
+                                token={onToken}
+                                stripeKey={KEY}
+                                email="jibu@abc.com"
+                                currency="INR"
+                            >
+                               <Button>CHECKOUT NOW</Button> 
+                            </StripeCheckout> */}
                         </Summary>
                     </Bottom>
                 </Wrapper>

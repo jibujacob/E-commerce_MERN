@@ -11,6 +11,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 function App() {
   const user = true;
@@ -42,6 +44,12 @@ function App() {
           </Route>
           <Route path="/product/:id" >
             <Product/>
+          </Route>
+          <Route path="/success" >
+            <Success/>
+          </Route>
+          <Route path="/cancel" >
+            <Cancel/>
           </Route>
         </Switch>
       </Router>
