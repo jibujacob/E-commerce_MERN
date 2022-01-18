@@ -18,8 +18,7 @@
     MONGO_CART_URI, 
     MONGO_ORDER_URI, 
     JWT_KEY, 
-    STRIPE_KEY, 
-    STRIPE_REACT_KEY
+    STRIPE_KEY
   
   
   CI/CD:
