@@ -1,0 +1,13 @@
+name: tests-ecommercecart
+
+on:
+  pull_request:
+    paths:
+      - "ecommercecart/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd ecommercecart && npm install && npm run test:ci
