@@ -54,5 +54,29 @@
 
 ## Product List Page
 
+<img width="1440" alt="Screenshot 2022-01-19 at 6 37 33 PM" src="https://user-images.githubusercontent.com/81481787/150137250-7a15ebb1-a833-4b0d-aad7-7bbe7e437613.png">
+
+### Selecting the Options
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 37 48 PM" src="https://user-images.githubusercontent.com/81481787/150137298-59499184-ff4d-4f9c-b74e-2803759550a0.png">
+
+### Item Added to Cart
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 37 57 PM" src="https://user-images.githubusercontent.com/81481787/150137349-a1294db9-6676-4342-8260-28eec1c53a1e.png">
+
+## Cart Page
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 38 03 PM" src="https://user-images.githubusercontent.com/81481787/150137411-cc2fcad1-001d-4457-a53d-0c597c26647a.png">
+
+## Payment 
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 38 21 PM" src="https://user-images.githubusercontent.com/81481787/150137447-b6fe4c1e-687d-4358-87b5-03c5290391db.png">
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 38 39 PM" src="https://user-images.githubusercontent.com/81481787/150137462-0ce223e0-d95d-4280-a835-161b27a741ff.png">
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 39 11 PM" src="https://user-images.githubusercontent.com/81481787/150137471-8263ee2f-b981-47c5-ade9-31b7b25e6532.png">
+
+<img width="1440" alt="Screenshot 2022-01-19 at 6 39 25 PM" src="https://user-images.githubusercontent.com/81481787/150137483-415bb120-2606-49f8-a98f-e67354552c04.png">
+
 
 
