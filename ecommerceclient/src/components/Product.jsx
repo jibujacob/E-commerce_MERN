@@ -19,7 +19,6 @@ const Info = styled.div`
     z-index:3;
     background-color:rgba(0,0,0,0.2);
     transition:all 0.5s ease;
-    cursor:pointer;
 `
 
 const Container = styled.div`
@@ -61,6 +60,7 @@ const Icon = styled.div`
     justify-content:center;
     margin:10px;
     transition:all 0.5s ease;
+    cursor:pointer;
     
 
     &:hover{
@@ -75,12 +75,13 @@ function Product({item}) {
             <Circle/>
             <Image src={item.img}/>
             <Info>
-                <Icon>
+                {/* <Icon>
                     <ShoppingCartOutlinedIcon/>
-                </Icon>
+                </Icon> */}
                 <Icon>
                     <Link to={`/product/${item.id}`}>
-                        <SearchOutlinedIcon/>
+                        <ShoppingCartOutlinedIcon/>
+                        {/* <SearchOutlinedIcon/> */}
                     </Link>
                 </Icon>
                 <Icon>

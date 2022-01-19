@@ -22,7 +22,7 @@ const router = express.Router();
 
 /* New Logic */
 router.post("/api/payments",
-        // requireAuth,
+        requireAuth,
         async(req:Request,res:Response)=>{
 
     const session = await stripe.checkout.sessions.create({

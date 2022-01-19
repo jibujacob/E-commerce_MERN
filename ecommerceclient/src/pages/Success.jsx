@@ -1,26 +1,51 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
+
+import Announcement from '../components/Announcement';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import { mobile } from '../Responsive'
 
 const Container  = styled.div`
     width:100vw;
-    height:100vh;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+`
+const Wrapper  = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-`
-const Wrapper  = styled.div`
     padding:20px;
+    flex-direction:column;
+    height:70vh;
+
+    ${mobile({height:"40vh"})};
+`
+
+const Title = styled.h1`
+    margin-bottom:20px;
+
+`
+
+const Content = styled.p`
+
 `
 
 const Success = () => {
-    const location = useLocation();
-    console.log(location)
     return (
         <Container>
+            <Announcement/>
+            <Navbar/>
             <Wrapper>
-                Successfull
+                <Title>Thanks for your order!</Title>
+                <Content>
+                  We appreciate your business!
+                  If you have any questions, please email :
+                  <a href="mailto:contact@jj.com">contact@jj.com</a>.
+                </Content>
             </Wrapper>
+            <Footer/>
         </Container> 
     )
 }

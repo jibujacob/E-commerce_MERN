@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import SendIcon from '@mui/icons-material/Send';
@@ -59,13 +59,20 @@ const Button = styled.button`
 `
 
 function Newsletter() {
+    const [email,setEmail] = useState("");
+    const handleClick = () => {
+        //Placeholder code
+        setEmail("");
+        alert("Thank you for subscribing to out news letter!")
+    }
+
     return (
         <Container>
             <Title>Newsletter</Title>
             <Description>Get timely updates from your favourite products.</Description>
             <InputContainer>
-                <Input type="email" placeholder="Your email"/>
-                <Button>
+                <Input value={email} type="email" placeholder="Your email" onChange={e => setEmail(e.target.value)}/>
+                <Button onClick={handleClick}>
                     <SendIcon/>
                 </Button>
             </InputContainer>

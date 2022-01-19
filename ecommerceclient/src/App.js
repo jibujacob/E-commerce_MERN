@@ -13,19 +13,15 @@ import {
 } from "react-router-dom";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import { useSelector } from "react-redux";
+import {ScrollToTop} from "./util/scrollToTop";
 
 function App() {
-  const user = true;
+  const user = useSelector(state=>state.user.currentUser.username);
   return (
     <div className="app">
-      {/* <Home/> */}
-      {/* <ProductList/> */}
-      {/* <Product/> */}
-      {/* <Register/> */}
-      {/* <Login/> */}
-      {/* <Cart/>  */}
-
       <Router>
+        <ScrollToTop/>
         <Switch>
           <Route exact path="/" >
             <Home/>
@@ -37,7 +33,7 @@ function App() {
             {user ? <Redirect to="/"/>:<Register/>}
           </Route>
           <Route path="/cart" >
-            <Cart/>
+            {user ? <Cart/>:<Login/>}
           </Route>
           <Route path="/products/:category" >
             <ProductList/>

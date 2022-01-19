@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import {Link} from "react-router-dom";
 import {sliderItems} from "../data"
 
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
@@ -120,7 +121,9 @@ function Slider() {
                             <InfoContainer>
                                 <Title>{items.title}</Title>
                                 <Desc>{items.desc}</Desc>
+                                    <Link to={`/products/${items.cat}`}>
                                 <Button>SHOP NOW</Button>
+                                </Link>           
                             </InfoContainer>
                         </Slide>
                     )

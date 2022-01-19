@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Badge } from '@mui/material';
 import { mobile } from '../Responsive';
+import { logout } from '../redux/apiCalls';
 
 
 const Container = styled.div`
@@ -57,7 +58,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
     font-weight:bold;
-    ${mobile({ fontSize: "24px" })};
+    ${mobile({ fontSize: "24px" ,display:"flex",justifyContent:"flex-end"})};
     cursor: pointer;
 `
 
@@ -66,7 +67,7 @@ const Right = styled.div`
     display: flex;
     align-items:center;
     justify-content:flex-end;
-    ${mobile({ flex:2,justifyContent: "center" })};
+    ${mobile({ flex:2,marginRight:"20px"})};
 `
 
 const MenuItem = styled.div`
@@ -77,14 +78,18 @@ const MenuItem = styled.div`
 `
 
 function Navbar() {
-
+    const user = useSelector(state=>state.user.currentUser.username);
     const quantity = useSelector(state => state.cart.quantity)
+    const dispatch = useDispatch();
 
+    const handleLogout = () => {
+        logout(dispatch);
+    }
     return (
         <Container>
             <Wrapper>
                 <Left>
-                    <Language>EN</Language>
+                    {/* <Language>EN</Language> */}
                     <SearchContainer>
                         <Input placeholder="Search"/>
                         <SearchIcon style={{color:"gray",fontSize:16}}/>
@@ -96,8 +101,23 @@ function Navbar() {
                     </Link>
                 </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                    {user 
+                    ?   <>
+                            <Link to="/" style={{textDecoration:"none",color:"inherit"}}>
+                                <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+                            </Link>
+                        </>
+                    :
+                        <>
+                            <Link to="/register" style={{textDecoration:"none",color:"inherit"}}>
+                                <MenuItem>REGISTER</MenuItem>
+                            </Link>
+                            <Link to="/login" style={{textDecoration:"none",color:"inherit"}}>
+                                <MenuItem>SIGN IN</MenuItem>
+                            </Link>
+                        </>
+                    }
+                    
 
                     <Link to="/cart">
                         <MenuItem>

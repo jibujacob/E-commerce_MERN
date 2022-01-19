@@ -1,21 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import {useSelector} from "react-redux";
-import StripeCheckout from "react-stripe-checkout";
+import {useDispatch, useSelector} from "react-redux";
 import axios from 'axios';
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import {loadStripe} from '@stripe/stripe-js';
-
+import {Link} from "react-router-dom";
 import { mobile } from '../Responsive'
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { clearCart, removeProduct } from '../redux/cartRedux';
 
-
-const KEY = process.env.REACT_APP_STRIPE;
 
 
 const Container = styled.div`
@@ -80,6 +75,8 @@ const ProductDetail = styled.div`
 
 const Image = styled.img`
     width:200px;
+
+    ${mobile({width:"150px"})};
 `
 
 const Details = styled.div`
@@ -87,14 +84,15 @@ const Details = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-around;
+    ${mobile({width:"150px",padding:"0 20px"})};
 `
 
 const ProductName = styled.span`
-
+    ${mobile({marginBottom:"10px"})};
 `
 
 const ProductId = styled.span`
-
+    ${mobile({marginBottom:"10px"})};
 `
 
 const ProductColor = styled.div`
@@ -102,10 +100,16 @@ const ProductColor = styled.div`
     height:20px;
     border-radius:50%;
     background-color:${props => props.color};
+    ${mobile({marginBottom:"10px"})};
 `
 
 const ProductSize = styled.span`
+    ${mobile({marginBottom:"10px"})};
 
+`
+
+const ProductAmount = styled.span`
+    ${mobile({marginBottom:"10px"})};
 `
 
 const PriceDetail = styled.div`
@@ -113,25 +117,30 @@ const PriceDetail = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:space-around;
+    ${mobile({marginLeft:"50px",marginTop:"5px",justifyContent:"center"})};
 `
 
 const ProductAmountContainer = styled.div`
     display:flex;
     align-items:center;
     margin-bottom:20px;
+    ${mobile({marginBottom:"5px"})};
 `
 
-const ProductAmount = styled.span`
-    font-size:24px;
-    margin:5px;
-    ${mobile({margin:"5px 15px"})};
-`
+// const ProductAmount = styled.span`
+//     font-size:24px;
+//     margin:5px;
+//     ${mobile({margin:"5px 15px",fontSize:"18px"})};
+// `
 
 const ProductPrice = styled.span`
     font-size:30px;
     font-weight:200;
-    ${mobile({marginBottom:"20px"})};
+    ${mobile({marginBottom:"20px",fontSize:"26px"})};
+`
+
+const Remove = styled(TopButton)`
 `
 const Hr = styled.hr`
     background-color: #eee ;
@@ -176,50 +185,24 @@ const Button = styled.button`
 `
 
 function Cart() {
-    const history = useHistory();
     const cart = useSelector(state => state.cart);
-    const [stripeToken,setStripeToken] = useState("")
-    const onToken = (token) =>{
-        setStripeToken(token);
-    }
-
-    // useEffect(()=>{
-    //     const checkoutpayment = async ()=>{
-    //         try {
-    //             const res = await axios.post("/api/payments",{
-    //                 amount:cart.total * 100,
-    //                 tokenId:stripeToken.id
-    //             });
-    //             history.push("/success",{data:res.data});
-    //             console.log(res.data);
-    //         } catch (error) {
-    //             console.log("checkoutpayment:",error);
-    //         }
-    //     }
-    //     stripeToken && checkoutpayment();
-        
-    // },[stripeToken])
- 
-    const handlePayment = async()=>{
-        const stripe = await loadStripe(KEY);
-        
+    const dispatch = useDispatch();
+    const handlePayment = async()=>{        
         const res = await axios.post("/api/payments",{
             amount:cart.total * 100,
-            quantity:cart.quantity
+            quantity:1
         })
-        window.location = res.data.session.url;
-        
-        // stripe.redirectToCheckout({
-        //     lineItems: [{
-        //       // Define the product and price in the Dashboard first, and use the price
-        //       // ID in your client-side code.
-        //       price: '{PRICE_ID}',
-        //       quantity: 1
-        //     }],
-        //     mode: 'payment',
-        //     successUrl: "http://ecommercejj.dev/success",
-        //     cancelUrl: 'http://ecommercejj.dev/cancel'
-        //   });
+        window.location = res.data.session.url; 
+    }
+
+    const handleRemoveProduct = (removedtotal,quantity,tempproductId) =>{
+        dispatch(removeProduct({
+            removedtotal,quantity,tempproductId
+        }));
+    }
+
+    const handleClearCart = () =>{
+        dispatch(clearCart());
     }
 
     return (
@@ -229,18 +212,20 @@ function Cart() {
                 <Wrapper>
                     <Title>YOUR BAG</Title>
                     <Top>
-                        <TopButton>CONTINUE SHOPPING</TopButton>
+                        <Link to="/" style={{textDecoration:"none",color:"inherit"}}>
+                            <TopButton>CONTINUE SHOPPING</TopButton>
+                        </Link>
                         <TopTexts>
                             <TopText>Shopping Bag ({cart.quantity})</TopText>
                             <TopText>Your Wishlist (0)</TopText>
                         </TopTexts>
-                        <TopButton onClick={handlePayment} type="filled">CHECKOUT NOW</TopButton>
+                        <TopButton onClick={handleClearCart} type="filled">CLEAR CART</TopButton>
                     </Top>
                     <Bottom>
                         <Info>
                             {cart.products.map(product => {
                                 return (
-                                    <div key={product.id}>
+                                    <div key={product.tempproductId}>
                                         <Product >
                                             <ProductDetail>
                                                 <Image src ={product.img}/>
@@ -249,16 +234,23 @@ function Cart() {
                                                     <ProductId><strong>ID:</strong> {product.id}</ProductId>
                                                     <ProductColor color={product.color}/>
                                                     <ProductSize><strong>Size:</strong> {product.size}</ProductSize>
+                                                    <ProductAmount><strong>Quantity:</strong> {product.quantity}</ProductAmount>
                                                 </Details>
                                             </ProductDetail>
                                             <PriceDetail>
-                                                <ProductAmountContainer>
+                                                {/* <ProductAmountContainer>
                                                     <AddIcon/>
                                                     <ProductAmount>{product.quantity}</ProductAmount>
                                                     <RemoveIcon/>
-                                                </ProductAmountContainer>
+                                                    <ProductAmount><strong>Quantity:</strong> {product.quantity}</ProductAmount>
+                                                </ProductAmountContainer> */}
                                                 <ProductPrice>&#8377;{product.price * product.quantity}</ProductPrice>
+                                                <Remove onClick={()=>handleRemoveProduct(product.price * product.quantity,
+                                                                        product.quantity,
+                                                                        product.tempproductId)} 
+                                                    type="filled">Remove</Remove>
                                             </PriceDetail>
+                                            
                                         </Product>
                                         <Hr/>
                                     </div>
@@ -287,20 +279,6 @@ function Cart() {
                                 <SummaryItemPrice>&#8377; {cart.total}</SummaryItemPrice>
                             </SummaryItem>
                             <Button onClick={handlePayment}>CHECKOUT NOW</Button>   
-                            {/* Older version of stripe usage */}
-                            {/* <StripeCheckout
-                                // name="JJ Shop"
-                                // billingAddress
-                                // shippingAddress
-                                // description={`Your total is Rs.${cart.total}`}
-                                amount={cart.total*100}
-                                token={onToken}
-                                stripeKey={KEY}
-                                email="jibu@abc.com"
-                                currency="INR"
-                            >
-                               <Button>CHECKOUT NOW</Button> 
-                            </StripeCheckout> */}
                         </Summary>
                     </Bottom>
                 </Wrapper>

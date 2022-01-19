@@ -82,6 +82,10 @@ const FilterColor = styled.div`
     cursor:pointer;
     border:1px solid black;
 
+    :focus{
+       transform:scale(1.3);
+    }
+
 `
 
 const FilterSize = styled.select`
@@ -150,15 +154,16 @@ function Product() {
         if(type==="inc"){
             setQuantity(quantity+1)
         }else{
-            if(quantity>0){setQuantity(quantity-1)}
+            if(quantity>1){setQuantity(quantity-1)}
         }
     }
 
     const handleClick = ()=>{
         if(color && size ){
+            const tempproductId= new Date().toISOString().toString().replaceAll("-","").replaceAll(":","").replaceAll(".","").replace("Z","");
             dispatch(
                 addProduct({
-                    ...product,quantity,color,size
+                    ...product,tempproductId,quantity,color,size
                 })
             )
         }else{
@@ -191,14 +196,16 @@ function Product() {
                             <FilterTitle>Color</FilterTitle>
                             {product.color?.map((item) => {
                                 return <FilterColor key={item} 
+                                            tabIndex="-1"
                                             color={item}
-                                            onClick ={()=>setColor(item) }/>
+                                            onClick ={()=>setColor(item)}
+                                            />
                             })}
                         </Filter> 
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize defaultValue={"Size"} onChange ={(e)=>setSize(e.target.value)}>
-                                <FilterSizeOption>Size</FilterSizeOption>
+                                <FilterSizeOption disabled>Size</FilterSizeOption>
                                 {product.size?.map((item) => {
                                     return <FilterSizeOption key={item}>{item}</FilterSizeOption>
                                 })}
