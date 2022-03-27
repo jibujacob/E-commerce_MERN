@@ -53,7 +53,7 @@ export const categories = [
     },
     {
       id:2,
-      img:"https://cdn.shopify.com/s/files/1/0101/4832/products/Angela_Natural_Tee.png?v=1606780388",
+      img:"https://zoodmall.com/cdn-cgi/image/w=500,fit=contain,f=auto/https://ae01.alicdn.com/kf/H4d08cf97c28c48da974b32fb91f4fca8U/2021-cotton-diamonds-floral-print-t-shirt-women-4XL-modis-summer-top-short-sleeve-graphic-tees.jpg",
     },
     {
       id:3,

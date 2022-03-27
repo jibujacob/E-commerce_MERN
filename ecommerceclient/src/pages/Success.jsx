@@ -18,7 +18,7 @@ const Wrapper  = styled.div`
     justify-content:center;
     padding:20px;
     flex-direction:column;
-    height:70vh;
+    height:50vh;
 
     ${mobile({height:"40vh"})};
 `
