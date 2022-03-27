@@ -4,7 +4,7 @@ import { app } from "./app";
 const PORT = process.env.PORT || 5001;
 
 const start = async () =>{
-    console.log("Starting the Cart Services.....");
+    console.log("Starting the Cart Services...");
     if(!process.env.MONGO_CART_URI){
         throw new Error("MONGO_CART_URI not defined for Cart Services")
     }

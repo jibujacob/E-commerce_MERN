@@ -4,7 +4,7 @@ import { app } from "./app";
 const PORT = process.env.PORT || 5001;
 
 const start = async () =>{
-    console.log("Starting the Product Services.....");
+    console.log("Starting the Product Services...");
     if(!process.env.MONGO_PRODUCT_URI){
         throw new Error("MONGO_PRODUCT_URI not defined for Product Services")
     }

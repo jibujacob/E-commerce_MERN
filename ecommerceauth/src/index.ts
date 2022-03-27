@@ -4,7 +4,7 @@ import { app } from "./app";
 const PORT = process.env.PORT || 5001;
 
 const start = async () =>{
-    console.log("Starting the Auth Services.....");
+    console.log("Starting the Auth Services...");
     if(!process.env.MONGO_AUTH_URI){
         throw new Error("MONGO_AUTH_URI not defined for Auth Services")
     }
