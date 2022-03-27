@@ -192,6 +192,7 @@ function Cart() {
             amount:cart.total * 100,
             quantity:1
         })
+        dispatch(clearCart());
         window.location = res.data.session.url; 
     }
 
