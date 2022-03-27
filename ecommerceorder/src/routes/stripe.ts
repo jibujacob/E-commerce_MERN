@@ -39,8 +39,8 @@ router.post("/api/payments",
           },
         ],
         mode: 'payment',
-        success_url: 'http://test-app-jpj-prod.xyz/success',
-        cancel_url: 'http://test-app-jpj-prod.xyz/cancel',
+        success_url: 'http://www.test-app-jpj-prod.xyz/success',
+        cancel_url: 'http://www.test-app-jpj-prod.xyz/cancel',
 
       });
      
