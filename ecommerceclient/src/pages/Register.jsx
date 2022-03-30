@@ -1,8 +1,8 @@
 import React , { useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { register } from '../redux/apiCalls'
 
+import { register } from '../redux/apiCalls'
 import { mobile } from '../Responsive'
 
 const Container = styled.div`
@@ -89,7 +89,7 @@ function Register() {
         }
     }
 
-    const { isFetching,error} = useSelector(state => state.user);
+    const { isFetching,isError} = useSelector(state => state.user);
     
     return (
         <Container>
@@ -112,9 +112,10 @@ function Register() {
                     />
                     <Agreement>By creating an account , I consent to
                         the processing of my personal data in 
-                        accordance with the <strong>PRIVACY POLICY</strong></Agreement>
-                    {error && <Error>Something went wrong</Error>}
+                        accordance with the <strong>PRIVACY POLICY</strong>
+                    </Agreement>
                     <Button onClick={handleRegister} disabled={isFetching}>Create</Button>
+                    {isError && <Error>Something went wrong</Error>}
                 </Form>
             </Wrapper>
         </Container>
