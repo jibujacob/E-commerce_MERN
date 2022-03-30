@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{ useState }  from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Navbar from "../components/Navbar"
@@ -8,8 +9,7 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 
 import { mobile } from '../Responsive'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+
 
 const Container = styled.div`
 

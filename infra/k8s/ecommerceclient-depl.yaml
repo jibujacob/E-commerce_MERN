@@ -1,4 +1,4 @@
-#Deployment Setup for Client service
+#Deployment Setup for Client service and network
 apiVersion: apps/v1
 kind: Deployment
 metadata:
