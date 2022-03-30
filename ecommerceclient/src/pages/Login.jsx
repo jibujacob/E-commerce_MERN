@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { login } from '../redux/apiCalls'
 
+import { login } from '../redux/apiCalls'
 import { mobile } from '../Responsive'
 
 const Container = styled.div`
@@ -78,7 +78,7 @@ function Login() {
     const [password,setPassword] = useState("");
     const dispatch = useDispatch();
 
-    const { isFetching,error} = useSelector(state => state.user);
+    const { isFetching,isError} = useSelector(state => state.user);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -95,8 +95,8 @@ function Login() {
                     <Input type="password" placeholder="Password" 
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {error && <Error>Something went wrong</Error>}
                     <Button onClick={handleLogin} disabled={isFetching}>Login</Button>
+                    {isError && <Error>Something went wrong</Error>}
                     <Link>FORGOT PASSWORD?</Link>
                     <Link>CREATE A NEW ACCOUNT</Link>
                 </Form>

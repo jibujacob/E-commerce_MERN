@@ -3,17 +3,18 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import {useDispatch} from "react-redux";
+
+
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
+import { mobile } from '../Responsive'
+import { addProduct } from '../redux/cartRedux'
 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-import { mobile } from '../Responsive'
-
-import { addProduct } from '../redux/cartRedux'
 
 
 const Container = styled.div`

@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import {useDispatch, useSelector} from "react-redux";
 import axios from 'axios';
+
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+//import AddIcon from '@mui/icons-material/Add';
+//import RemoveIcon from '@mui/icons-material/Remove';
 import {Link} from "react-router-dom";
 import { mobile } from '../Responsive'
 import { clearCart, removeProduct } from '../redux/cartRedux';
@@ -121,12 +122,12 @@ const PriceDetail = styled.div`
     ${mobile({marginLeft:"50px",marginTop:"5px",justifyContent:"center"})};
 `
 
-const ProductAmountContainer = styled.div`
-    display:flex;
-    align-items:center;
-    margin-bottom:20px;
-    ${mobile({marginBottom:"5px"})};
-`
+// const ProductAmountContainer = styled.div`
+//     display:flex;
+//     align-items:center;
+//     margin-bottom:20px;
+//     ${mobile({marginBottom:"5px"})};
+// `
 
 // const ProductAmount = styled.span`
 //     font-size:24px;

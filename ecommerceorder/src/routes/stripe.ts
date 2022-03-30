@@ -39,8 +39,10 @@ router.post("/api/payments",
           },
         ],
         mode: 'payment',
-        success_url: 'http://ecommercejj.dev/success',
-        cancel_url: 'http://ecommercejj.dev/cancel',
+        success_url: 'http://www.test-app-jpj-prod.xyz/success',
+        cancel_url: 'http://www.test-app-jpj-prod.xyz/cancel',
+        // success_url: 'http://ecommercejj.dev/success',
+        // cancel_url: 'http://ecommercejj.dev/cancel',
 
       });
      
