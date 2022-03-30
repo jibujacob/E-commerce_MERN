@@ -86,7 +86,7 @@ function Navbar() {
         logout(dispatch);
     }
     return (
-        <Container>
+        <Container data-testid="Navbar">
             <Wrapper>
                 <Left>
                     {/* <Language>EN</Language> */}

@@ -67,7 +67,7 @@ function Newsletter() {
     }
 
     return (
-        <Container>
+        <Container data-testid="Newsletter">
             <Title>Newsletter</Title>
             <Description>Get timely updates from your favourite products.</Description>
             <InputContainer>

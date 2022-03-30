@@ -46,8 +46,8 @@ const Button = styled.button`
 
 function CategoryItem({item}) {
     return (
-        <Container>
-            <Image src={item.img}/>
+        <Container data-testid="CategoryItem" >
+            <Image src={item.img} alt={`${item.title} image`}/>
             <Info>
                 <Title>{item.title}</Title>
                 <Link to={`/products/${item.cat}`}>

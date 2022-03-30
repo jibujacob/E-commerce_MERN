@@ -63,7 +63,7 @@ function ProductList() {
     }
 
     return (
-        <Container>
+        <Container data-testid="ProductList">
             <Announcement/>
             <Navbar/>
             <Title>{cat}</Title>

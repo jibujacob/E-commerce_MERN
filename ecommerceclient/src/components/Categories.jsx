@@ -15,7 +15,7 @@ const Container = styled.div`
 
 function Categories() {
     return (
-        <Container>
+        <Container data-testid="Categories">
             {categories.map(item => {
                 return <CategoryItem item={item} key={item.id} />
             })}

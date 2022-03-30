@@ -107,7 +107,7 @@ function Slider() {
     }
 
     return (
-        <Container>
+        <Container data-testid="Slider">
             <Arrow direction="left" onClick={()=>handleClick("left")}>
                 <ArrowLeftOutlinedIcon/>
             </Arrow>
