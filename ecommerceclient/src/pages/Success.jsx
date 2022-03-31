@@ -34,7 +34,7 @@ const Content = styled.p`
 
 const Success = () => {
     return (
-        <Container>
+        <Container data-testid="SuccessPage">
             <Announcement/>
             <Navbar/>
             <Wrapper>

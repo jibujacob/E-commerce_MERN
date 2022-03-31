@@ -208,7 +208,7 @@ function Cart() {
     }
 
     return (
-        <Container>
+        <Container data-testid="CartPage">
             <Announcement/>
             <Navbar/>
                 <Wrapper>

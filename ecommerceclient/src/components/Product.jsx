@@ -71,9 +71,9 @@ const Icon = styled.div`
 
 function Product({item}) {
     return (
-        <Container>
+        <Container data-testid="Product">
             <Circle/>
-            <Image src={item.img}/>
+            <Image src={item.img} alt="Product Image"/>
             <Info>
                 {/* <Icon>
                     <ShoppingCartOutlinedIcon/>

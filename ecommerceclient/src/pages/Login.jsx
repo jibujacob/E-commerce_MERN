@@ -85,14 +85,14 @@ function Login() {
         login(dispatch,{username,password});
     }
     return (
-        <Container>
+        <Container data-testid="LoginPage">
             <Wrapper>
                 <Title>SIGN IN</Title>
                 <Form>
-                    <Input placeholder="Username" 
+                    <Input aria-label="username" placeholder="Username" 
                         onChange={(e)=>setUsername(e.target.value)}
                     />
-                    <Input type="password" placeholder="Password" 
+                    <Input aria-label="password" type="password" placeholder="Password" 
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button onClick={handleLogin} disabled={isFetching}>Login</Button>

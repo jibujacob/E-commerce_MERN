@@ -4,8 +4,7 @@ import Newsletter from "../Newsletter";
 
 describe("NewsLetter Component Testing",()=>{
     beforeEach(()=>{
-        const {debug}=render(<Newsletter/>);
-        debug();
+        render(<Newsletter/>);
     })
 
     it("Newsletter Title Static Content is populated during render",()=>{

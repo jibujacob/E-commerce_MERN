@@ -34,7 +34,7 @@ const Content = styled.p`
 
 const Cancel = () => {
     return (
-        <Container>
+        <Container data-testid="CancelPage">
             <Announcement/>
             <Navbar/>
             <Wrapper>

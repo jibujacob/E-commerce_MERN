@@ -92,22 +92,22 @@ function Register() {
     const { isFetching,isError} = useSelector(state => state.user);
     
     return (
-        <Container>
+        <Container data-testid="RegisterPage">
             <Wrapper>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
-                    <Input placeholder="First Name" />
-                    <Input placeholder="Last Name" />
-                    <Input placeholder="Username" 
+                    <Input placeholder="First Name" aria-label="first name"/>
+                    <Input placeholder="Last Name" aria-label="last name"/>
+                    <Input placeholder="Username" aria-label="username"
                         onChange={e => setUsername(e.target.value)}
                     />
-                    <Input type="email" placeholder="Email" 
+                    <Input type="email" placeholder="Email" aria-label="email"
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <Input type="password" placeholder="Password" 
+                    <Input type="password" placeholder="Password" aria-label="password"
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <Input type="password" placeholder="Confirm Password" 
+                    <Input type="password" placeholder="Confirm Password" aria-label="confirm password"
                         onChange={e => setConfirmPassword(e.target.value)}
                     />
                     <Agreement>By creating an account , I consent to

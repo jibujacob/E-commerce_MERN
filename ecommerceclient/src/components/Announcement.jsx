@@ -14,7 +14,7 @@ const Container = styled.div`
 
 function Announcement() {
     return (
-        <Container>
+        <Container data-testid="Announcement">
             Super Deal! Free Shipping on all Orders
         </Container>
     )

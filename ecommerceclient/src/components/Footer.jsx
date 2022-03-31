@@ -94,7 +94,7 @@ const Payment = styled.img`
 
 function Footer() {
     return (
-        <Container>
+        <Container data-testid="Footer">
             <Left>
                 <Logo>JJ.</Logo>    
                 <Description>

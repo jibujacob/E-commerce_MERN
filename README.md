@@ -33,6 +33,7 @@ Development Tools: - Skaffold - Docker - K8 - Git Actions - Used to testing the 
 - Search Implementation
 - Themeing
 - Newsletter Integration
+- Order History
 
 ## UI Homepage
 
